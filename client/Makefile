@@ -10,7 +10,7 @@ local:
 
 init:
 	NG_CLI_ANALYTICS=ci npm install
-	./node_modules/sass-migrator/sass-migrator.js division './node_modules/font-awesome/scss/*.scss'
+	# ./node_modules/sass-migrator/sass-migrator.js division './node_modules/font-awesome/scss/*.scss'
 	# npm audit fix
 
 prod:

@@ -1,30 +1,35 @@
 <p>
 
-	<button matSuffix mat-icon-button aria-label="Clear">
-		<mat-icon>close</mat-icon>
-	</button>
-
 </p>
 
 <mat-form-field>
 	<mat-label>书名</mat-label>
 	<input matInput [(ngModel)]="name">
+	<button *ngIf="name" matSuffix mat-icon-button aria-label="Clear Name" (click)="name=''">
+		<mat-icon>close</mat-icon>
+	</button>
 </mat-form-field>
 
 <mat-form-field>
 	<mat-label>作者</mat-label>
 	<input matInput [(ngModel)]="author">
+	<button *ngIf="author" matSuffix mat-icon-button aria-label="Clear Author" (click)="author=''">
+		<mat-icon>close</mat-icon>
+	</button>
 </mat-form-field>
 
 <mat-form-field>
 	<mat-label>出版社</mat-label>
-	<input matInput [(ngModel)]="publisher">
+	<input matInput type="text" [(ngModel)]="publisher">
+	<button *ngIf="publisher" matSuffix mat-icon-button aria-label="Clear Publisher" (click)="publisher=''">
+		<mat-icon>close</mat-icon>
+	</button>
 </mat-form-field>
 
 <mat-form-field>
 	<mat-label>扩展名</mat-label>
-	<input matInput [matAutocomplete]="autoExt" [(ngModel)]="ext">
-	<button matSuffix mat-icon-button aria-label="Clear" (click)="ext=''">
+	<input matInput type="text" [matAutocomplete]="autoExt" [(ngModel)]="ext">
+	<button matSuffix mat-icon-button aria-label="Clear Extension" (click)="ext=''">
 		<mat-icon>close</mat-icon>
 	</button>
 	<mat-autocomplete #autoExt="matAutocomplete">
@@ -36,8 +41,8 @@
 
 <mat-form-field>
 	<mat-label>语言</mat-label>
-	<input matInput [matAutocomplete]="autoLang" [(ngModel)]="lang">
-	<button *ngIf="lang" matSuffix mat-icon-button aria-label="Clear" (click)="lang=''">
+	<input matInput type="text" [matAutocomplete]="autoLang" [(ngModel)]="lang">
+	<button *ngIf="lang" matSuffix mat-icon-button aria-label="Clear Language" (click)="lang=''">
 		<mat-icon>close</mat-icon>
 	</button>
 	<mat-autocomplete #autoLang="matAutocomplete">

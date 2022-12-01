@@ -1,0 +1,83 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "rules": {
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ],
+		"quotes": ["error", "single"],
+		"semi": "error",
+		"indent": ["error", "tab", {
+			"SwitchCase": 1,
+			"outerIIFEBody": 1,
+			"MemberExpression": 1
+		}],
+		"curly": "error",
+		"@typescript-eslint/no-explicit-any": "off",
+		"no-sparse-arrays": "off",
+		"@typescript-eslint/no-this-alias": "off",
+		"@typescript-eslint/explicit-function-return-type": "off",
+		"no-unused-expressions": ["error", { "allowShortCircuit": true }],
+		"no-unneeded-ternary": "error",
+		"array-bracket-spacing": ["error", "never"],
+		"arrow-spacing": "error",
+		"block-spacing": "error",
+		"comma-dangle": ["error", "always-multiline"],
+		"comma-spacing": ["error", { "before": false, "after": true }],
+		"comma-style": "error",
+		"func-call-spacing": ["error", "never"],
+		"brace-style": ["error", "1tbs", { "allowSingleLine": false }],
+		"key-spacing": "error",
+		"keyword-spacing": "error",
+		"no-constant-condition": "off",
+		"no-empty": ["error", { "allowEmptyCatch": true }],
+		"no-empty-function": ["error", { "allow": ["constructors"] }],
+		"no-multi-spaces": "error",
+		"no-unused-vars": ["warn", { "varsIgnorePattern": "_", "args": "none" }],
+		"no-var": "error",
+		"object-curly-spacing": ["error", "always"],
+		"prefer-arrow-callback": "error",
+		"prefer-const": "error",
+		"quote-props": ["error", "as-needed"],
+		"space-in-parens": "error",
+		"space-infix-ops": ["error", { "int32Hint": false }],
+		"space-before-blocks": "error"
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {}
+    }
+  ]
+}

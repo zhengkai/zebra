@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 
 @Component({
 	selector: 'app-root',
-	templateUrl: './app.component.html',
+	templateUrl: './bootstrap.component.html',
 	styles: [],
 })
-export class AppComponent {
+export class BootstrapComponent {
 	title = 'SearchUI';
 }

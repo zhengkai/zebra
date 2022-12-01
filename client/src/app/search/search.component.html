@@ -1,0 +1,48 @@
+<p>
+
+	<button matSuffix mat-icon-button aria-label="Clear">
+		<mat-icon>close</mat-icon>
+	</button>
+
+</p>
+
+<mat-form-field>
+	<mat-label>书名</mat-label>
+	<input matInput [(ngModel)]="name">
+</mat-form-field>
+
+<mat-form-field>
+	<mat-label>作者</mat-label>
+	<input matInput [(ngModel)]="author">
+</mat-form-field>
+
+<mat-form-field>
+	<mat-label>出版社</mat-label>
+	<input matInput [(ngModel)]="publisher">
+</mat-form-field>
+
+<mat-form-field>
+	<mat-label>扩展名</mat-label>
+	<input matInput [matAutocomplete]="autoExt" [(ngModel)]="ext">
+	<button matSuffix mat-icon-button aria-label="Clear" (click)="ext=''">
+		<mat-icon>close</mat-icon>
+	</button>
+	<mat-autocomplete #autoExt="matAutocomplete">
+		<mat-option *ngFor="let option of extOption" [value]="option">
+			{{option}}
+		</mat-option>
+	</mat-autocomplete>
+</mat-form-field>
+
+<mat-form-field>
+	<mat-label>语言</mat-label>
+	<input matInput [matAutocomplete]="autoLang" [(ngModel)]="lang">
+	<button *ngIf="lang" matSuffix mat-icon-button aria-label="Clear" (click)="lang=''">
+		<mat-icon>close</mat-icon>
+	</button>
+	<mat-autocomplete #autoLang="matAutocomplete">
+		<mat-option *ngFor="let option of langOption" [value]="option">
+			{{option}}
+		</mat-option>
+	</mat-autocomplete>
+</mat-form-field>

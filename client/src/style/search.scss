@@ -1,0 +1,24 @@
+.search-box {
+	max-width: 1288px;
+	margin: 0 auto;
+	flex-wrap: wrap;
+	> .name, > .author {
+		width: calc(50% - 0.5rem);
+		margin: 0 0.25rem;
+	}
+	> .publisher, > .ext, > .lang, > .isbn {
+		width: calc(25% - 0.5rem);
+		margin: 0 0.25rem;
+	}
+}
+
+@media screen and (max-width:650px) {
+	.search-box {
+		> .name, > .author {
+			width: calc(100% - 0.5rem);
+		}
+		> .publisher, > .ext, > .lang, > .isbn  {
+			width: calc(50% - 0.5rem);
+		}
+	}
+}

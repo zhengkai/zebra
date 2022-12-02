@@ -1,53 +1,63 @@
-<p>
+<div class="search-box">
+	<mat-form-field class="name">
+		<mat-label>书名</mat-label>
+		<input matInput [(ngModel)]="name" (change)="doSearch()" (keyup)="doSearch()">
+		<button *ngIf="name" matSuffix mat-icon-button aria-label="Clear Name" (click)="name='';doSearch()">
+			<mat-icon>close</mat-icon>
+		</button>
+	</mat-form-field>
 
-</p>
+	<mat-form-field class="author">
+		<mat-label>作者</mat-label>
+		<input matInput [(ngModel)]="author" (change)="doSearch()" (keyup)="doSearch()">
+		<button *ngIf="author" matSuffix mat-icon-button aria-label="Clear Author" (click)="author='';doSearch()">
+			<mat-icon>close</mat-icon>
+		</button>
+	</mat-form-field>
 
-<mat-form-field>
-	<mat-label>书名</mat-label>
-	<input matInput [(ngModel)]="name">
-	<button *ngIf="name" matSuffix mat-icon-button aria-label="Clear Name" (click)="name=''">
-		<mat-icon>close</mat-icon>
-	</button>
-</mat-form-field>
+	<mat-form-field class="publisher">
+		<mat-label>出版社</mat-label>
+		<input matInput type="text" [(ngModel)]="publisher" (change)="doSearch()" (keyup)="doSearch()">
+		<button *ngIf="publisher" matSuffix mat-icon-button aria-label="Clear Publisher" (click)="publisher='';doSearch()">
+			<mat-icon>close</mat-icon>
+		</button>
+	</mat-form-field>
 
-<mat-form-field>
-	<mat-label>作者</mat-label>
-	<input matInput [(ngModel)]="author">
-	<button *ngIf="author" matSuffix mat-icon-button aria-label="Clear Author" (click)="author=''">
-		<mat-icon>close</mat-icon>
-	</button>
-</mat-form-field>
+	<mat-form-field class="ext">
+		<mat-label>扩展名</mat-label>
+		<input matInput type="text" [matAutocomplete]="autoExt" [(ngModel)]="ext" (change)="doSearch()" (keyup)="doSearch()">
+		<button *ngIf="ext" matSuffix mat-icon-button aria-label="Clear Extension" (click)="ext='';doSearch()">
+			<mat-icon>close</mat-icon>
+		</button>
+		<mat-autocomplete #autoExt="matAutocomplete" (optionSelected)="doSearch()">
+			<mat-option *ngFor="let option of extOption" [value]="option">
+				{{option}}
+			</mat-option>
+		</mat-autocomplete>
+	</mat-form-field>
 
-<mat-form-field>
-	<mat-label>出版社</mat-label>
-	<input matInput type="text" [(ngModel)]="publisher">
-	<button *ngIf="publisher" matSuffix mat-icon-button aria-label="Clear Publisher" (click)="publisher=''">
-		<mat-icon>close</mat-icon>
-	</button>
-</mat-form-field>
+	<mat-form-field class="lang">
+		<mat-label>语言</mat-label>
+		<input matInput type="text" [matAutocomplete]="autoLang" [(ngModel)]="lang" (change)="doSearch()" (keyup)="doSearch()">
+		<button *ngIf="lang" matSuffix mat-icon-button aria-label="Clear Language" (click)="lang='';doSearch()">
+			<mat-icon>close</mat-icon>
+		</button>
+		<mat-autocomplete #autoLang="matAutocomplete" (optionSelected)="doSearch()">
+			<mat-option *ngFor="let option of langOption" [value]="option">
+				{{option}}
+			</mat-option>
+		</mat-autocomplete>
+	</mat-form-field>
 
-<mat-form-field>
-	<mat-label>扩展名</mat-label>
-	<input matInput type="text" [matAutocomplete]="autoExt" [(ngModel)]="ext">
-	<button matSuffix mat-icon-button aria-label="Clear Extension" (click)="ext=''">
-		<mat-icon>close</mat-icon>
-	</button>
-	<mat-autocomplete #autoExt="matAutocomplete">
-		<mat-option *ngFor="let option of extOption" [value]="option">
-			{{option}}
-		</mat-option>
-	</mat-autocomplete>
-</mat-form-field>
+	<mat-form-field class="isbn">
+		<mat-label>ISBN</mat-label>
+		<input matInput type="text" [(ngModel)]="isbn" (change)="doSearch()" (keyup)="doSearch()">
+		<button *ngIf="isbn" matSuffix mat-icon-button aria-label="Clear ISBN" (click)="isbn='';doSearch()">
+			<mat-icon>close</mat-icon>
+		</button>
+	</mat-form-field>
+</div>
 
-<mat-form-field>
-	<mat-label>语言</mat-label>
-	<input matInput type="text" [matAutocomplete]="autoLang" [(ngModel)]="lang">
-	<button *ngIf="lang" matSuffix mat-icon-button aria-label="Clear Language" (click)="lang=''">
-		<mat-icon>close</mat-icon>
-	</button>
-	<mat-autocomplete #autoLang="matAutocomplete">
-		<mat-option *ngFor="let option of langOption" [value]="option">
-			{{option}}
-		</mat-option>
-	</mat-autocomplete>
-</mat-form-field>
+<p>{{ query }}</p>
+<p>{{ url }}</p>
+<p *ngFor="let a of result">{{ a | json }}</p>

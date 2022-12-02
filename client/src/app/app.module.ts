@@ -7,6 +7,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule } from '@angular/forms';
 
+import { HttpClientModule } from '@angular/common/http';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
@@ -71,6 +73,7 @@ import { SettingComponent } from './setting/setting.component';
 		NoopAnimationsModule,
 		FormsModule,
 		MatFormFieldModule,
+		HttpClientModule,
 
 		MatToolbarModule,
 		MatInputModule,

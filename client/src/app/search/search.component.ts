@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Row, SearchService } from './search.service';
 
-type searchKey = 'name' | 'author' | 'lang' | 'ext';
+type searchKey = 'name' | 'author' | 'publisher' | 'lang' | 'ext' | 'isbn';
 
 @Component({
 	selector: 'app-search',
@@ -40,6 +40,8 @@ export class SearchComponent {
 	constructor(
 		public srv: SearchService,
 	) {
+		this.name = '百年';
+		this.doSearch();
 	}
 
 	doSearch() {
@@ -66,7 +68,7 @@ export class SearchComponent {
 	buildSearch(): string {
 
 		let query = '';
-		for (const s of ['name', 'author', 'lang']) {
+		for (const s of ['name', 'author', 'publisher', 'lang', 'ext', 'isbn']) {
 			query += this.buildQuery(s as searchKey);
 		}
 		console.log(query);
@@ -74,11 +76,41 @@ export class SearchComponent {
 	}
 
 	buildQuery(key: searchKey): string {
-		const s = this[key]?.replace(/"/, '') || '';
+		const s = this[key]?.replace(/"/g, '') || '';
 		if (!s.length) {
 			return '';
 		}
 		key = (this.keyBackend as any)[key] || key;
 		return `${key}:"${s}"`;
+	}
+
+	formatBytes(n: number) {
+		if (n <= 0) {
+			return '';
+		}
+		if (n < 1024) {
+			return '1K';
+		}
+
+		const units = ['KB', 'MB', 'GB', 'TB'];
+		let i = 0;
+
+		for (; n >= 1024 && i < 4; i++) {
+			n /= 1024;
+		}
+
+		return n.toFixed(1) + ' ' + units[i - 1];
+	}
+
+	buildLink(r: Row) {
+
+		const host = 'https://cloudflare-ipfs.com';
+
+		const name = `${r.name}_${r.author}`.replace(/\s+/g, '_');
+		console.log('name', name);
+
+		const url = `${host}/ipfs/${r.ipfs_cid}?filename=${encodeURIComponent(name)}.${r.ext}`;
+
+		return url;
 	}
 }

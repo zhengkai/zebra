@@ -22,3 +22,75 @@
 		}
 	}
 }
+
+.search-result {
+	max-width: 1280px;
+	margin: 0 auto;
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		border-spacing: 0;
+		font-size: 1rem;
+		th {
+			background-color: #eee;
+			padding: 0.5rem;
+		}
+		td {
+			padding: 0.375rem;
+			border: 1px solid silver;
+			&.name {
+				min-width: 10rem;
+			}
+			&.author, &.publisher  {
+				max-width: 10rem;
+				min-width: 6rem;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+			}
+			&.filesize {
+				text-align: right;
+				max-width: 4rem;
+			}
+			&.isbn {
+				max-width: 8rem;
+				/*
+				span {
+					display: inline-block;
+					padding: 0.125rem;
+					margin: 0.125rem;
+					border: 1px solid gray;
+					font-size: 0.875rem;
+					background-color: #eee;
+					margin-right: 0.125rem;
+				}
+				 */
+			}
+			&.dl {
+				min-width: 4rem;
+				text-align: center;
+			}
+		}
+	}
+}
+
+@media screen and (max-width:650px) {
+	.search-result {
+		table {
+			th {
+				&.publisher, &.lang, &.isbn {
+					display: none;
+				}
+			}
+			td {
+				&.author,  {
+					max-width: 5rem;
+					width: 5rem;
+				}
+				&.publisher, &.lang, &.isbn {
+					display: none;
+				}
+			}
+		}
+	}
+}

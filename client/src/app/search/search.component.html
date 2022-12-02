@@ -58,6 +58,27 @@
 	</mat-form-field>
 </div>
 
-<p>{{ query }}</p>
-<p>{{ url }}</p>
-<p *ngFor="let a of result">{{ a | json }}</p>
+<div class="search-result" *ngIf="result?.length">
+	<table>
+		<tr>
+			<th class="name">书名</th>
+			<th class="author">作者</th>
+			<th class="publisher">出版社</th>
+			<th class="ext">扩展名</th>
+			<th class="lang">语言</th>
+			<th class="isbn">ISBN</th>
+			<th class="filesize">&#160;</th>
+			<th class="dl">&#160;</th>
+		</tr>
+		<tr *ngFor="let a of result">
+			<td class="name" [title]="a.name"><span>{{ a.name }}</span></td>
+			<td class="author" [title]="a.author"><span>{{ a.author }}</span></td>
+			<td class="publisher" [title]="a.publisher"><span>{{ a.publisher }}</span></td>
+			<td class="ext"><span>{{ a.ext }}</span></td>
+			<td class="lang"><span>{{ a.lang }}</span></td>
+			<td class="isbn" [title]="a.isbn"><span>{{ a.isbn }}</span></td>
+			<td class="filesize"><span>{{ formatBytes(a.filesize) }}</span></td>
+			<td class="dl"><a mat-button [href]="buildLink(a)" target="_blank">下载</a></td>
+		</tr>
+	</table>
+</div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavService } from './nav.service';
 
 @Component({
 	selector: 'app-root',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class BootstrapComponent {
 	title = 'SearchUI';
+
+	constructor(
+		public nav: NavService,
+	) {
+	}
 }

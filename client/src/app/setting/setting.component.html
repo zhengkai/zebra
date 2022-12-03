@@ -1,1 +1,30 @@
-<p>setting works!</p>
+<div class="coming">coming soon</div>
+
+<h2>test</h2>
+<section>
+	<mat-checkbox class="example-margin" [disabled]="true">记住最后一次搜索条件</mat-checkbox>
+</section>
+
+<h2>下载</h2>
+<section>
+	<mat-checkbox class="example-margin" [disabled]="true">文件名包括出版社</mat-checkbox>
+</section>
+<section>
+	<mat-checkbox class="example-margin" [disabled]="true">文件名包括作者</mat-checkbox>
+</section>
+<section>
+	<mat-form-field style="width: min(100%, 40rem);">
+		<mat-label>下载站</mat-label>
+		<input matInput type="text" [matAutocomplete]="autoSite" [(ngModel)]="dlSite">
+		<button *ngIf="dlSite" matSuffix mat-icon-button aria-label="Clear Language" (click)="dlSite=''">
+			<mat-icon>close</mat-icon>
+		</button>
+		<mat-autocomplete #autoSite="matAutocomplete">
+			<mat-option *ngFor="let url of dlSiteSuggest" [value]="url">
+				{{ url }}
+			</mat-option>
+		</mat-autocomplete>
+	</mat-form-field>
+</section>
+
+<button mat-raised-button disabled>保存</button>

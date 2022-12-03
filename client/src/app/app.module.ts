@@ -18,6 +18,9 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { SearchComponent } from './search/search.component';
 import { SettingComponent } from './setting/setting.component';
+import { BookmarkComponent } from './bookmark/bookmark.component';
+import { HistoryComponent } from './history/history.component';
+import { AboutComponent } from './about/about.component';
 
 // import { A11yModule } from '@angular/cdk/a11y';
 // import { CdkAccordionModule } from '@angular/cdk/accordion';
@@ -32,7 +35,7 @@ import { SettingComponent } from './setting/setting.component';
 // import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 // import { MatButtonToggleModule } from '@angular/material/button-toggle';
 // import { MatCardModule } from '@angular/material/card';
-// import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 // import { MatChipsModule } from '@angular/material/chips';
 // import { MatStepperModule } from '@angular/material/stepper';
 // import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -66,6 +69,9 @@ import { MatTableModule } from '@angular/material/table';
 		BootstrapComponent,
 		SearchComponent,
 		SettingComponent,
+		BookmarkComponent,
+		HistoryComponent,
+		AboutComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -80,6 +86,7 @@ import { MatTableModule } from '@angular/material/table';
 		MatIconModule,
 		MatAutocompleteModule,
 		MatButtonModule,
+		MatCheckboxModule,
 	],
 	providers: [],
 	bootstrap: [
@@ -101,7 +108,6 @@ export class AppModule {
 		// MatBottomSheetModule,
 		// MatButtonToggleModule,
 		// MatCardModule,
-		// MatCheckboxModule,
 		// MatChipsModule,
 		// MatDatepickerModule,
 		// MatDialogModule,

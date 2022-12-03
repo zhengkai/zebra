@@ -105,7 +105,7 @@ export class SearchService {
 				lang: '' + (row?.language || ''),
 				year: +row?.year,
 				pages: +row?.pages,
-				isbn: (row?.isbn || '').replace(/,/, ', '),
+				isbn: (row?.isbn || '').replace(/,/g, ', '),
 				ipfs_cid: '' + (row?.ipfs_cid || ''),
 			});
 		}

@@ -6,9 +6,110 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: Roboto, "Helvetica Neue", sans-serif;
+	overflow-y: scroll;
 }
 
 p.clean {
 	clear: both;
 	height: 5rem;
+}
+
+header, footer {
+	background-color: #3f51b5;
+	> div {
+		max-width: 1280px;
+		margin: 0 auto;
+	}
+}
+
+header {
+	height: 4rem;
+	margin-bottom: 1rem;
+	color: #fff;
+	> div {
+		line-height: 4rem;
+		display: flex;
+		justify-content: space-between;
+		.title {
+			font-size: 1.75rem;
+			font-weight: bold;
+			cursor: default;
+		}
+		nav {
+			font-size: 1.25rem;
+			a {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 10rem;
+				text-align: center;
+				height: 4rem;
+				color: #eee;
+				text-decoration: none;
+				mat-icon {
+					margin-right: 0.5rem;
+				}
+				&.selected {
+					background-color: rgba(255, 255, 255, 0.125);
+				}
+				&:hover {
+					background-color: rgba(0, 0, 0, 0.125);
+					color: #fff;
+					font-weight: bold;
+				}
+				&:disabled {
+					color: #ccc;
+					background-color: red;
+				}
+			}
+		}
+	}
+}
+
+app-root > div {
+	min-height: calc(100vh - 14rem);
+	max-width: 1688px;
+	margin: 0 auto;
+	padding: 0 2rem;
+}
+
+@media screen and (max-width:682px) {
+	app-root > div {
+		padding: 0;
+	}
+}
+
+footer {
+	clear: both;
+	margin-top: 3rem;
+	height: 6rem;
+	padding: 1rem;
+	box-sizing: border-box;
+	font-size: 1rem;
+	color: #eee;
+	line-height: 2;
+	a {
+		color: #fff;
+		font-weight: bold;
+		text-underline-offset: 2px;
+	}
+}
+
+.coming {
+	text-align: center;
+	padding-top: 8rem;
+	padding-bottom: 8rem;
+	font-size: 2rem;
+	color: gray;
+}
+
+mat-checkbox {
+	label {
+		font-size: 1rem;
+	}
+}
+
+h2 {
+	padding-top: 1rem;
+
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Row, SearchService } from './search.service';
+import { NavService } from '../common/nav.service';
 
 type searchKey = 'name' | 'author' | 'publisher' | 'lang' | 'ext' | 'isbn';
 
@@ -39,9 +40,12 @@ export class SearchComponent {
 
 	constructor(
 		public srv: SearchService,
+		public nav: NavService,
 	) {
 		this.name = '百年';
 		this.doSearch();
+
+		this.nav.go('search');
 	}
 
 	doSearch() {

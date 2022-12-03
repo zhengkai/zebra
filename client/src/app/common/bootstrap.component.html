@@ -1,9 +1,21 @@
-<p>
-  <mat-toolbar color="primary">
-    <span>zLib Searcher UI</span>
-  </mat-toolbar>
-</p>
+<header>
+	<div>
+		<div class="title">
+			Zebra 书籍搜索
+		</div>
+		<nav>
+			<a *ngFor="let a of nav.list" [routerLink]="[a.path]" [class.selected]="nav.selectKey === a.key"><mat-icon>{{ a.icon }}</mat-icon>{{ a.name }}</a>
+		</nav>
+	</div>
+</header>
 
+<div>
 <router-outlet></router-outlet>
+</div>
 
-<p class="clean">
+<footer>
+	<div>本网页 <a href="https://github.com/zhengkai/zebra">zhengkai/zebra</a> 是基于
+		<a href="https://github.com/zu1k/zlib-searcher">zu1k/zlib-searcher</a> 的搜索界面，
+		数据源自 <a href="https://zh.wikipedia.org/wiki/Z-Library">Z-Library</a>
+		，下载基于 <a href="https://ipfs.tech/">IPFS</a></div>
+</footer>

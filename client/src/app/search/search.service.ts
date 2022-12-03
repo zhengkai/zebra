@@ -30,7 +30,7 @@ export interface Row {
 })
 export class SearchService {
 
-	baseURL = 'https://zlib.9farm.com/search?limit=100&query=';
+	baseURL = '/search?limit=100&query=';
 
 	lastQuery = '';
 
@@ -39,6 +39,9 @@ export class SearchService {
 	constructor(
 		private http: HttpClient,
 	) {
+		if (window.location.host !== 'zebra.9farm.com') {
+			this.baseURL = 'https://zlib.9farm.com' + this.baseURL;
+		}
 	}
 
 	async Search(query: string) {
@@ -72,9 +75,6 @@ export class SearchService {
 
 	async fetch(p: Page) {
 		const url = this.baseURL + encodeURIComponent(p.query);
-
-		console.log('fetch url', url);
-
 		this.http.get(url, {
 			responseType: 'json',
 		}).subscribe((data: any) => {

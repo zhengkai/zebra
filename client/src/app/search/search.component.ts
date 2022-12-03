@@ -12,8 +12,7 @@ import { SessionService } from '../common/session.service';
 export class SearchComponent {
 
 	langOption = ['chinese', 'english'];
-	extOption = ['epub', 'mobi', 'azw3', 'pdf'];
-	option = 'abc';
+	extOption = ['epub', 'mobi', 'azw3', 'pdf', 'txt'];
 
 	keyBackend = {
 		name: 'title',
@@ -34,8 +33,6 @@ export class SearchComponent {
 
 	query = '';
 	url = '';
-
-	pageCache: { [key: string]: Promise<any[]> } = {};
 
 	constructor(
 		public srv: SearchService,
@@ -69,12 +66,10 @@ export class SearchComponent {
 	}
 
 	buildSearch(): string {
-
 		let query = '';
 		for (const s of ['name', 'author', 'publisher', 'lang', 'ext', 'isbn']) {
 			query += this.buildQuery(s as SearchKey);
 		}
-		console.log(query);
 		return query;
 	}
 
@@ -109,7 +104,11 @@ export class SearchComponent {
 
 		const host = 'https://cloudflare-ipfs.com';
 
-		const name = `${r.name}_${r.author}`.replace(/\s+/g, '_');
+		let name = r.name;
+		if (name !== r.author) {
+			name += '_' + r.author;
+		}
+		name = name.replace(/\s+/g, '_');
 
 		const url = `${host}/ipfs/${r.ipfs_cid}?filename=${encodeURIComponent(name)}.${r.ext}`;
 

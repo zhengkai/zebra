@@ -14,6 +14,7 @@ init:
 	# npm audit fix
 
 prod:
-	./dist/build.sh zlib.9farm.com prod
-	ssh dart 'mkdir -p /www/zlib/client'
-	rsync --partial -vzrtopg -e ssh ./dist/prod/ dart:/www/zlib/client/
+	./dist/build.sh zebra.9farm.com prod
+	ssh dart 'mkdir -p /www/zebra/client'
+	rsync --partial -vzrtopg -e ssh ./dist/prod/ dart:/www/zebra/client/
+	scp ../misc/nginx/prod.conf dart:/www/zebra/nginx.conf

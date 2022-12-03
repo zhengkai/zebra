@@ -1,5 +1,7 @@
-zLib Searcher UI
+Zebra：基于 [zLib Searcher](https://github.com/zu1k/zlib-searcher) 的 Web 界面
 ======
+
+[plan](https://github.com/zhengkai/zebra/blob/master/PLAN.md)
 
 
 TODO:
@@ -13,3 +15,4 @@ TODO:
 * 分享书单
 * 离线也能查看已搜过页面
 * 多个后台汇总，防止单点
+* 对单个下载的评价/打分

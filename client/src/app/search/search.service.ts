@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+export type SearchKey = 'name' | 'author' | 'publisher' | 'lang' | 'ext' | 'isbn';
+
 export interface Page {
 	query: string;
 	result: Row[];

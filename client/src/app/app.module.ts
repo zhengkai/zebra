@@ -3,7 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { RoutingModule } from './app-routing.module';
 import { BootstrapComponent } from './common/bootstrap.component';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+// import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule } from '@angular/forms';
 
@@ -48,7 +49,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 // import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 // import { MatPaginatorModule } from '@angular/material/paginator';
 // import { MatProgressBarModule } from '@angular/material/progress-bar';
-// import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 // import { MatRadioModule } from '@angular/material/radio';
 // import { MatSelectModule } from '@angular/material/select';
 // import { MatSidenavModule } from '@angular/material/sidenav';
@@ -76,7 +77,8 @@ import { MatTableModule } from '@angular/material/table';
 	imports: [
 		BrowserModule,
 		RoutingModule,
-		NoopAnimationsModule,
+		// NoopAnimationsModule,
+		BrowserAnimationsModule,
 		FormsModule,
 		MatFormFieldModule,
 		HttpClientModule,
@@ -87,6 +89,7 @@ import { MatTableModule } from '@angular/material/table';
 		MatAutocompleteModule,
 		MatButtonModule,
 		MatCheckboxModule,
+		MatProgressSpinnerModule,
 	],
 	providers: [],
 	bootstrap: [
@@ -119,7 +122,6 @@ export class AppModule {
 		// MatNativeDateModule,
 		// MatPaginatorModule,
 		// MatProgressBarModule,
-		// MatProgressSpinnerModule,
 		// MatRadioModule,
 		// MatRippleModule,
 		// MatSelectModule,

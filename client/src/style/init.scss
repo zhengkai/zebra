@@ -35,6 +35,11 @@ header {
 			font-weight: bold;
 			cursor: default;
 		}
+		.loading {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+		}
 		nav {
 			font-size: 1.25rem;
 			a {

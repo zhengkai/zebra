@@ -34,6 +34,8 @@ export class NavService {
 
 	selectKey = 'search';
 
+	loading = false;
+
 	// constructor() { }
 
 	go(key: string) {

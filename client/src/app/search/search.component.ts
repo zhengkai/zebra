@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { Row, SearchService } from './search.service';
+import { SearchKey, Row, SearchService } from './search.service';
 import { NavService } from '../common/nav.service';
-
-type searchKey = 'name' | 'author' | 'publisher' | 'lang' | 'ext' | 'isbn';
+import { SessionService } from '../common/session.service';
 
 @Component({
 	selector: 'app-search',
@@ -41,45 +40,45 @@ export class SearchComponent {
 	constructor(
 		public srv: SearchService,
 		public nav: NavService,
+		public session: SessionService,
 	) {
-		this.name = '百年';
+		for (const [k, v] of Object.entries(session.search)) {
+			this[k as SearchKey] = v;
+		}
 		this.doSearch();
-
 		this.nav.go('search');
 	}
 
 	doSearch() {
-		console.log(this.name, this.author, this.lang, this.publisher, this.ext, this.isbn);
-
 		const query = this.buildSearch();
-
-		(async () => {
-			const { ok, result } = await this.srv.Search(query);
-			if (!ok || this.lastResult === query) {
-				return;
-			}
-			this.lastResult = query;
-			this.result = result;
-		})();
-
-		// title:"自私"author:"道"publisher:"1"extension:"2"language:"3"isbn:"4"
+		this.search(query);
 	}
 
-	showResult() {
-		console.log();
+	async search(query: string) {
+		this.session.save(this);
+		this.nav.loading = true;
+		const { ok, result } = await this.srv.Search(query);
+		if (ok) {
+			this.nav.loading = false;
+		}
+		if (!ok || this.lastResult === query) {
+			return;
+		}
+		this.lastResult = query;
+		this.result = result;
 	}
 
 	buildSearch(): string {
 
 		let query = '';
 		for (const s of ['name', 'author', 'publisher', 'lang', 'ext', 'isbn']) {
-			query += this.buildQuery(s as searchKey);
+			query += this.buildQuery(s as SearchKey);
 		}
 		console.log(query);
 		return query;
 	}
 
-	buildQuery(key: searchKey): string {
+	buildQuery(key: SearchKey): string {
 		const s = this[key]?.replace(/"/g, '') || '';
 		if (!s.length) {
 			return '';
@@ -111,7 +110,6 @@ export class SearchComponent {
 		const host = 'https://cloudflare-ipfs.com';
 
 		const name = `${r.name}_${r.author}`.replace(/\s+/g, '_');
-		console.log('name', name);
 
 		const url = `${host}/ipfs/${r.ipfs_cid}?filename=${encodeURIComponent(name)}.${r.ext}`;
 

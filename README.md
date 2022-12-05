@@ -3,7 +3,7 @@ Zebra：基于 [zLib Searcher](https://github.com/zu1k/zlib-searcher) 的 Web �
 
 <https://zebra.9farm.com/>
 
-<a href="https://zebra.9farm.com/"><img src="https://raw.githubusercontent.com/zhengkai/zebra/master/misc/logo.png" width="256" height="256" alt="Zebra Logo" /></a>
+<a href="https://zebra.9farm.com/"><img src="https://raw.githubusercontent.com/zhengkai/zebra/master/misc/logo/readme.webp" width="256" height="256" alt="Zebra Logo" /></a>
 
 [plan](https://github.com/zhengkai/zebra/blob/master/PLAN.md)
 

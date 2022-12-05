@@ -39,9 +39,6 @@ export class SearchService {
 	constructor(
 		private http: HttpClient,
 	) {
-		if (window.location.host !== 'zebra.9farm.com') {
-			this.baseURL = 'https://zlib.9farm.com' + this.baseURL;
-		}
 	}
 
 	async Search(query: string) {

@@ -77,12 +77,34 @@ header {
 	}
 }
 
+@media screen and (max-width:650px) {
+	header {
+		> div {
+			height: 2rem;
+			.title {
+				img {
+					margin-right: 0;
+				}
+				span {
+					display: none;
+				}
+			}
+			nav {
+				font-size: 1rem;
+				a {
+					width: 5rem;
+				}
+			}
+		}
+	}
+}
+
 app-root > div {
 	min-height: calc(100vh - 14rem);
 	margin: 0 auto;
 	padding: 0 2rem;
 	&.fixed {
-		width: 1280px;
+		max-width: 1280px;
 	}
 }
 

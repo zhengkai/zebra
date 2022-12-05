@@ -1,14 +1,3 @@
-<h2>杂项</h2>
-<section>
-	<mat-checkbox [(ngModel)]="srv.current['misc.rememberLastSearch']">记住最后一次搜索条件</mat-checkbox>
-</section>
-<section>
-	<mat-checkbox [(ngModel)]="srv.current['misc.dlLeftButton']">下载按钮在最左边</mat-checkbox>
-</section>
-<section>
-	<mat-checkbox [(ngModel)]="srv.current['misc.fixedWidth']">定宽（最大 1280px）</mat-checkbox>
-</section>
-
 <h2>搜索字段</h2>
 <section>
 	<ng-container *ngFor="let k of srv.keyList || []">
@@ -46,6 +35,17 @@
 			</mat-option>
 		</mat-autocomplete>
 	</mat-form-field>
+</section>
+
+<h2>杂项</h2>
+<section>
+	<mat-checkbox [(ngModel)]="srv.current['misc.rememberLastSearch']">记住最后一次搜索条件</mat-checkbox>
+</section>
+<section>
+	<mat-checkbox [(ngModel)]="srv.current['misc.dlLeftButton']">下载按钮在最左边</mat-checkbox>
+</section>
+<section>
+	<mat-checkbox [(ngModel)]="srv.current['misc.fixedWidth']">定宽（最大 1280px）</mat-checkbox>
 </section>
 
 <section class="op">

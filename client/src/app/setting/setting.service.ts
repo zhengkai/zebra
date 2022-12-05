@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 const d = Object.freeze({
 	'misc.rememberLastSearch': true,
-	'misc.dlLeftButton': false,
+	'misc.dlLeftButton': navigator.userAgent.match(/iPhone|Android/i),
 	'misc.dlSite': 'https://cloudflare-ipfs.com/',
 	'misc.fixedWidth': false,
 	'searchCol.author': true,
@@ -54,8 +54,9 @@ export class SettingService {
 			let v = this.tmpData[k];
 			if (v === undefined) {
 				v = d[k];
+			} else {
+				this.d[k] = v;
 			}
-			this.d[k] = v;
 			this.current[k] = v;
 		}
 		this.keyList = Object.keys(d);
@@ -65,7 +66,7 @@ export class SettingService {
 		if (!this.current['misc.dlSite']?.length) {
 			return true;
 		}
-		for (const s of Object.keys(this.d)) {
+		for (const s of Object.keys(this.current)) {
 			if (this.d[s as settingKey] !== this.current[s]) {
 				return false;
 			}
@@ -83,10 +84,10 @@ export class SettingService {
 		if (!this.current['misc.dlSite']) {
 			this.current['misc.dlSite'] = d['misc.dlSite'];
 		}
-		for (const s of Object.keys(this.d)) {
+		for (const s of Object.keys(this.current)) {
 			this.d[s as settingKey] = this.current[s];
 		}
-		if (!this.current.rememberLastSearch) {
+		if (!this.current['misc.rememberLastSearch']) {
 			localStorage.removeItem('session');
 		}
 		localStorage.setItem('setting', JSON.stringify(this.current));

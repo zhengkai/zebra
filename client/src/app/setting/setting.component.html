@@ -1,16 +1,27 @@
-<div class="coming">coming soon</div>
-
-<h2>test</h2>
+<h2>杂项</h2>
 <section>
-	<mat-checkbox class="example-margin" [disabled]="true">记住最后一次搜索条件</mat-checkbox>
+	<mat-checkbox [checked]="rememberLastSearch">记住最后一次搜索条件</mat-checkbox>
+</section>
+<section>
+	<mat-checkbox [checked]="dlLeftButton">下载按钮在最左边</mat-checkbox>
+</section>
+
+<h2>搜索字段</h2>
+<section>
+	<mat-checkbox *ngFor="let a of searchCol | keyvalue">{{ keyName[a.key] }}</mat-checkbox>
+</section>
+
+<h2>展示字段</h2>
+<section>
+	<mat-checkbox *ngFor="let a of resultCol | keyvalue" [checked]="a.value">{{ keyName[a.key] }}</mat-checkbox>
 </section>
 
 <h2>下载</h2>
 <section>
-	<mat-checkbox class="example-margin" [disabled]="true">文件名包括出版社</mat-checkbox>
+	<mat-checkbox [checked]="fileName.publisher">文件名包括出版社</mat-checkbox>
 </section>
 <section>
-	<mat-checkbox class="example-margin" [disabled]="true">文件名包括作者</mat-checkbox>
+	<mat-checkbox [checked]="fileName.author">文件名包括作者</mat-checkbox>
 </section>
 <section>
 	<mat-form-field style="width: min(100%, 40rem);">

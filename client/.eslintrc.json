@@ -60,6 +60,10 @@
 		"no-empty-function": ["error", { "allow": ["constructors"] }],
 		"no-multi-spaces": "error",
 		"no-unused-vars": ["warn", { "varsIgnorePattern": "_", "args": "none" }],
+		"@typescript-eslint/no-unused-vars": [ "warn", {
+			"argsIgnorePattern": "^_",
+			"varsIgnorePattern": "^_"
+		}],
 		"no-var": "error",
 		"object-curly-spacing": ["error", "always"],
 		"prefer-arrow-callback": "error",
@@ -68,16 +72,16 @@
 		"space-in-parens": "error",
 		"space-infix-ops": ["error", { "int32Hint": false }],
 		"space-before-blocks": "error"
-      }
-    },
-    {
-      "files": [
-        "*.html"
-      ],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended"
-      ],
-      "rules": {}
-    }
+	  }
+	},
+	{
+		"files": [
+			"*.html"
+		],
+		"extends": [
+			"plugin:@angular-eslint/template/recommended"
+		],
+		"rules": {}
+	}
   ]
 }

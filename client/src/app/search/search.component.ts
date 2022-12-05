@@ -29,6 +29,9 @@ export class SearchComponent {
 	publisher = '';
 	ext = '';
 	isbn = '';
+	id = '';
+
+	error = false;
 
 	result: Row[] = [];
 
@@ -50,6 +53,7 @@ export class SearchComponent {
 
 	doSearch() {
 		const query = this.buildSearch();
+		this.error = false;
 		this.search(query);
 	}
 
@@ -58,8 +62,10 @@ export class SearchComponent {
 			this.session.save(this);
 		}
 		this.nav.loading = true;
-		const { ok, result } = await this.srv.Search(query);
+		const { ok, error, result } = await this.srv.Search(query);
+		// await new Promise((p) => setTimeout(p, 1000));
 		if (ok) {
+			this.error = error;
 			this.nav.loading = false;
 		}
 		if (!ok || this.lastResult === query) {
@@ -71,14 +77,21 @@ export class SearchComponent {
 
 	buildSearch(): string {
 		let query = '';
-		for (const s of ['name', 'author', 'publisher', 'lang', 'ext', 'isbn']) {
-			query += this.buildQuery(s as SearchKey);
+		if (this.id.length) {
+			query = this.buildQuery(<SearchKey>'id');
+		} else {
+			for (const s of ['name', 'author', 'publisher', 'lang', 'ext', 'isbn', 'id']) {
+				query += this.buildQuery(s as SearchKey);
+			}
 		}
 		return query;
 	}
 
 	buildQuery(key: SearchKey): string {
-		const s = this[key]?.replace(/"/g, '') || '';
+		let s = this[key]?.replace(/"/g, '') || '';
+		if (key === <SearchKey>'id') {
+			s = s.replace(/[^0-9]/g, '');
+		}
 		if (!s.length) {
 			return '';
 		}

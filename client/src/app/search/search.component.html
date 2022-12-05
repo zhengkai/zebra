@@ -56,19 +56,37 @@
 			<mat-icon>close</mat-icon>
 		</button>
 	</mat-form-field>
+
+	<mat-form-field class="zlib-id" *ngIf="setting.current['searchCol.zlib_id']">
+		<mat-label>zLib ID</mat-label>
+		<input matInput type="text" [(ngModel)]="id" (change)="doSearch()" (keyup)="doSearch()">
+		<button *ngIf="id" matSuffix mat-icon-button aria-label="Clear zLib ID" (click)="id='';doSearch()">
+			<mat-icon>close</mat-icon>
+		</button>
+	</mat-form-field>
 </div>
 
 <div class="search-result{{ setting.current['misc.fixedWidth'] ? ' search-result-fixed' : ''}}">
+
+	<div class="fail" *ngIf="error">
+		<p>最近一次搜索失败，可以尝试改变搜索条件或
+		<button mat-raised-button color="primary" (click)="doSearch()">
+			<mat-icon>restart_alt</mat-icon>重新搜索
+		</button>
+		</p>
+		<p>当然也可能是后台挂了</p>
+	</div>
+
 	<table *ngIf="result?.length">
 		<tr>
 			<th class="dl" *ngIf="setting.current['misc.dlLeftButton']">&#160;</th>
-			<th class="id" *ngIf="setting.current['resultCol.zlib_id']">zLib ID</th>
 			<th class="name">书名</th>
 			<th class="author" *ngIf="setting.current['resultCol.author']">作者</th>
 			<th class="publisher" *ngIf="setting.current['resultCol.publisher']">出版社</th>
 			<th class="ext" *ngIf="setting.current['resultCol.ext']">扩展名</th>
 			<th class="lang" *ngIf="setting.current['resultCol.lang']">语言</th>
 			<th class="isbn" *ngIf="setting.current['resultCol.isbn']">ISBN</th>
+			<th class="id" *ngIf="setting.current['resultCol.zlib_id']">zLib ID</th>
 			<th class="filesize" *ngIf="setting.current['resultCol.filesize']">&#160;</th>
 			<th class="dl" *ngIf="!setting.current['misc.dlLeftButton']">&#160;</th>
 		</tr>

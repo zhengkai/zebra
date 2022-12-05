@@ -43,7 +43,6 @@ export class SearchService {
 
 	async Search(query: string) {
 		this.lastQuery = query;
-
 		let p = this.cache[query];
 		if (!p) {
 			p = <Page>{
@@ -55,6 +54,9 @@ export class SearchService {
 			};
 			this.fetch(p);
 			this.cache[query] = p;
+		} else if (p.error && p.done) {
+			p.done = false;
+			this.fetch(p);
 		}
 		if (!p.done) {
 			const a = new Promise((resolve) => {
@@ -66,23 +68,35 @@ export class SearchService {
 		}
 		return {
 			ok: this.lastQuery === query,
+			error: p.error,
 			result: p.result,
 		};
 	}
 
-	async fetch(p: Page) {
+	fetch(p: Page) {
 		const url = this.baseURL + encodeURIComponent(p.query);
-		this.http.get(url, {
-			responseType: 'json',
-		}).subscribe((data: any) => {
-			this.parseData(p, data);
+
+		const end = () => {
+
 			p.done = true;
 			for (const cb of p.cbList) {
 				cb();
 			}
 			p.cbList.length = 0;
-		});
+		};
 
+		this.http.get(url, {
+			responseType: 'json',
+		}).subscribe({
+			next: (data: unknown) => {
+				this.parseData(p, data);
+				end();
+			},
+			error: () => {
+				p.error = true;
+				end();
+			},
+		});
 	}
 
 	parseData(p: Page, data: any) {

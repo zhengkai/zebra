@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SearchKey } from '../search/search.service';
+import { BookSuggest } from './book-suggest';
 
 @Injectable({
 	providedIn: 'root',
@@ -17,13 +18,17 @@ export class SessionService {
 
 	constructor() {
 		let d: any = {};
+		let load = false;
 		try {
 			const j = localStorage.getItem('session');
 			if (j) {
 				d = JSON.parse(j);
+				load = true;
 			}
 		} catch (x) {
-			d = {};
+		}
+		if (!load) {
+			d = BookSuggest;
 		}
 
 		for (const k of Object.keys(this.search)) {

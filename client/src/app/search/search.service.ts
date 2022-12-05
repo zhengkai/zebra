@@ -58,6 +58,9 @@ export class SearchService {
 			p.done = false;
 			this.fetch(p);
 		}
+		if (query === '') {
+			p.done = true;
+		}
 		if (!p.done) {
 			const a = new Promise((resolve) => {
 				p.cbList.push(() => {

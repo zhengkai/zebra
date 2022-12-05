@@ -97,7 +97,7 @@ export class SearchService {
 			if (!row?.id) {
 				continue;
 			}
-			p.result.push(<Row>{
+			const r = <Row>{
 				id: +row.id,
 				name: '' + (row?.title || ''),
 				author: '' + (row?.author || ''),
@@ -109,7 +109,20 @@ export class SearchService {
 				pages: +row?.pages,
 				isbn: (row?.isbn || '').replace(/,/g, ', '),
 				ipfs_cid: '' + (row?.ipfs_cid || ''),
-			});
+			};
+
+			if (r.ext.length) {
+				// 去掉书名里多余的 .txt 之类的
+				const kl: SearchKey[] = ['name', 'author', 'publisher'];
+				for (const k of kl) {
+					const v = r[k];
+					if (!v.endsWith('.' + r.ext)) {
+						continue;
+					}
+					r[k] = v.substring(0, v.length - 1 - r.ext.length);
+				}
+			}
+			p.result.push(r);
 		}
 	}
 }

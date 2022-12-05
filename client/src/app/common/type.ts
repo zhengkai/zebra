@@ -9,4 +9,5 @@ export const KeyName = {
 	isbn: 'ISBN',
 	zlib_id: 'zLib ID',
 	page: '页码',
+	filesize: '文件大小',
 };

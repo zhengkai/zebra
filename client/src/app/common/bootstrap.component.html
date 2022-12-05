@@ -1,7 +1,7 @@
 <header>
 	<div>
 		<div class="title">
-			<img src="/assets/logo.webp">Zebra 书籍搜索
+			<img src="/assets/logo.webp" alt="Zebra Logo">Zebra 书籍搜索
 		</div>
 		<div class="loading" *ngIf="nav.loading">
 			<mat-spinner color="accent" diameter="32" mode="indeterminate"></mat-spinner>
@@ -11,8 +11,7 @@
 		</nav>
 	</div>
 </header>
-
-<div>
+<div [class.fixed]="nav.selectKey !== 'search'">
 <router-outlet></router-outlet>
 </div>
 

@@ -1,33 +1,43 @@
 <h2>杂项</h2>
 <section>
-	<mat-checkbox [checked]="rememberLastSearch">记住最后一次搜索条件</mat-checkbox>
+	<mat-checkbox [(ngModel)]="srv.current['misc.rememberLastSearch']">记住最后一次搜索条件</mat-checkbox>
 </section>
 <section>
-	<mat-checkbox [checked]="dlLeftButton">下载按钮在最左边</mat-checkbox>
+	<mat-checkbox [(ngModel)]="srv.current['misc.dlLeftButton']">下载按钮在最左边</mat-checkbox>
+</section>
+<section>
+	<mat-checkbox [(ngModel)]="srv.current['misc.fixedWidth']">定宽（最大 1280px）</mat-checkbox>
 </section>
 
 <h2>搜索字段</h2>
 <section>
-	<mat-checkbox *ngFor="let a of searchCol | keyvalue">{{ keyName[a.key] }}</mat-checkbox>
+	<ng-container *ngFor="let k of srv.keyList || []">
+		<mat-checkbox *ngIf="k.startsWith('searchCol.')" [(ngModel)]="srv.current[k]">{{ keyName[k.split('.')[1]] }}</mat-checkbox>
+	</ng-container>
 </section>
 
 <h2>展示字段</h2>
 <section>
-	<mat-checkbox *ngFor="let a of resultCol | keyvalue" [checked]="a.value">{{ keyName[a.key] }}</mat-checkbox>
+	<ng-container *ngFor="let k of srv.keyList || []">
+		<mat-checkbox *ngIf="k.startsWith('resultCol.')" [(ngModel)]="srv.current[k]">{{ keyName[k.split('.')[1]] }}</mat-checkbox>
+	</ng-container>
 </section>
 
 <h2>下载</h2>
 <section>
-	<mat-checkbox [checked]="fileName.publisher">文件名包括出版社</mat-checkbox>
+	<mat-checkbox [(ngModel)]="srv.current['fileName.publisher']">文件名包括出版社</mat-checkbox>
 </section>
 <section>
-	<mat-checkbox [checked]="fileName.author">文件名包括作者</mat-checkbox>
+	<mat-checkbox [(ngModel)]="srv.current['fileName.author']">文件名包括作者</mat-checkbox>
+</section>
+<section>
+	<mat-checkbox [(ngModel)]="srv.current['fileName.zlib_id']">文件名包括 zLib ID</mat-checkbox>
 </section>
 <section>
 	<mat-form-field style="width: min(100%, 40rem);">
 		<mat-label>下载站</mat-label>
-		<input matInput type="text" [matAutocomplete]="autoSite" [(ngModel)]="dlSite">
-		<button *ngIf="dlSite" matSuffix mat-icon-button aria-label="Clear Language" (click)="dlSite=''">
+		<input matInput type="text" [matAutocomplete]="autoSite" [(ngModel)]="srv.current['misc.dlSite']">
+		<button *ngIf="srv.current['misc.dlSite']" matSuffix mat-icon-button aria-label="Clear Language" (click)="srv.current['misc.dlSite']=''">
 			<mat-icon>close</mat-icon>
 		</button>
 		<mat-autocomplete #autoSite="matAutocomplete">
@@ -38,4 +48,7 @@
 	</mat-form-field>
 </section>
 
-<button mat-raised-button disabled>保存</button>
+<section class="op">
+<button class="reset" mat-raised-button color="warn" (click)="srv.reset()"><mat-icon>restart_alt</mat-icon>恢复默认</button>
+<button class="save" mat-raised-button color="primary" (click)="srv.save()" [disabled]="srv.saveButtonDisabled()"><mat-icon>save</mat-icon>保存设置</button>
+</section>

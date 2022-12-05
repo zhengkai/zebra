@@ -1,13 +1,17 @@
 Zebra：基于 [zLib Searcher](https://github.com/zu1k/zlib-searcher) 的 Web 界面
 ======
 
+<https://zebra.9farm.com/>
+
+<a href="https://zebra.9farm.com/"><img src="https://raw.githubusercontent.com/zhengkai/zebra/master/misc/logo.png" width="256" height="256" alt="Zebra Logo" /></a>
+
 [plan](https://github.com/zhengkai/zebra/blob/master/PLAN.md)
 
 
 TODO:
 
-* 自定义搜索项/结果字段
-* 自定义下载按钮
+* ~~自定义搜索项/结果字段~~ (2022.12.05)
+* ~~自定义下载按钮~~ (2022.12.05)
 * 导入导出设置
 * 搜索历史（麻烦在于敲字过程中的历史怎么去掉
 * 保存单本书

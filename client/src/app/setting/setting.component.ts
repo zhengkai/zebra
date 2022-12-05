@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavService } from '../common/nav.service';
+import { SettingService } from './setting.service';
 import { KeyName } from '../common/type';
 
 @Component({
@@ -9,31 +10,6 @@ import { KeyName } from '../common/type';
 	],
 })
 export class SettingComponent {
-
-	rememberLastSearch = false;
-	dlLeftButton = false;
-
-	searchCol = {
-		lang: false,
-		publisher: false,
-		ext: false,
-		isbn: false,
-		zlib_id: false,
-	};
-
-	resultCol = {
-		lang: false,
-		publisher: false,
-		ext: false,
-		isbn: false,
-		zlib_id: false,
-		page: false,
-	};
-
-	fileName = {
-		publisher: false,
-		author: false,
-	};
 
 	dlSite = 'https://cloudflare-ipfs.com/';
 
@@ -49,6 +25,7 @@ export class SettingComponent {
 
 	constructor(
 		public nav: NavService,
+		public srv: SettingService,
 	) {
 		this.nav.go('setting');
 	}

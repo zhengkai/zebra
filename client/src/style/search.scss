@@ -11,6 +11,10 @@
 	}
 }
 
+.search-box-fixed {
+	max-width: 1288px;
+}
+
 @media screen and (max-width:650px) {
 	.search-box {
 		> .name, > .author {
@@ -30,6 +34,7 @@
 		border-collapse: collapse;
 		border-spacing: 0;
 		font-size: 1rem;
+		border: 1px solid #eee;
 		th {
 			background-color: #eee;
 			padding: 0.5rem;
@@ -38,6 +43,11 @@
 		td {
 			padding: 0.375rem;
 			border: 1px solid silver;
+			&.id {
+				width: 5rem;
+				text-align: right;
+				white-space: nowrap;
+			}
 			&.name {
 				min-width: 10rem;
 			}
@@ -53,19 +63,11 @@
 				min-width: 4.5rem;
 				padding-right: 0.5rem;
 			}
+			&.ext {
+				text-align: center;
+			}
 			&.isbn {
 				max-width: 8rem;
-				/*
-				span {
-					display: inline-block;
-					padding: 0.125rem;
-					margin: 0.125rem;
-					border: 1px solid gray;
-					font-size: 0.875rem;
-					background-color: #eee;
-					margin-right: 0.125rem;
-				}
-				 */
 			}
 			&.dl {
 				min-width: 4rem;
@@ -81,6 +83,10 @@
 	}
 }
 
+.search-result-fixed {
+	max-width: 1280px;
+}
+
 @media screen and (max-width:650px) {
 	.search-result {
 		table {
@@ -90,7 +96,7 @@
 				}
 			}
 			td {
-				&.author,  {
+				&.author {
 					max-width: 5rem;
 					width: 5rem;
 				}

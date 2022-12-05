@@ -1,4 +1,4 @@
-<div class="search-box">
+<div class="search-box{{ setting.current['misc.fixedWidth'] ? ' search-box-fixed' : ''}}">
 	<mat-form-field class="name">
 		<mat-label>书名</mat-label>
 		<input matInput [(ngModel)]="name" (change)="doSearch()" (keyup)="doSearch()">
@@ -7,7 +7,7 @@
 		</button>
 	</mat-form-field>
 
-	<mat-form-field class="author">
+	<mat-form-field class="author" *ngIf="setting.current['searchCol.author']">
 		<mat-label>作者</mat-label>
 		<input matInput [(ngModel)]="author" (change)="doSearch()" (keyup)="doSearch()">
 		<button *ngIf="author" matSuffix mat-icon-button aria-label="Clear Author" (click)="author='';doSearch()">
@@ -15,7 +15,7 @@
 		</button>
 	</mat-form-field>
 
-	<mat-form-field class="publisher">
+	<mat-form-field class="publisher" *ngIf="setting.current['searchCol.publisher']">
 		<mat-label>出版社</mat-label>
 		<input matInput type="text" [(ngModel)]="publisher" (change)="doSearch()" (keyup)="doSearch()">
 		<button *ngIf="publisher" matSuffix mat-icon-button aria-label="Clear Publisher" (click)="publisher='';doSearch()">
@@ -23,7 +23,7 @@
 		</button>
 	</mat-form-field>
 
-	<mat-form-field class="ext">
+	<mat-form-field class="ext" *ngIf="setting.current['searchCol.ext']">
 		<mat-label>扩展名</mat-label>
 		<input matInput type="text" [matAutocomplete]="autoExt" [(ngModel)]="ext" (change)="doSearch()" (keyup)="doSearch()">
 		<button *ngIf="ext" matSuffix mat-icon-button aria-label="Clear Extension" (click)="ext='';doSearch()">
@@ -36,7 +36,7 @@
 		</mat-autocomplete>
 	</mat-form-field>
 
-	<mat-form-field class="lang">
+	<mat-form-field class="lang" *ngIf="setting.current['searchCol.lang']">
 		<mat-label>语言</mat-label>
 		<input matInput type="text" [matAutocomplete]="autoLang" [(ngModel)]="lang" (change)="doSearch()" (keyup)="doSearch()">
 		<button *ngIf="lang" matSuffix mat-icon-button aria-label="Clear Language" (click)="lang='';doSearch()">
@@ -49,7 +49,7 @@
 		</mat-autocomplete>
 	</mat-form-field>
 
-	<mat-form-field class="isbn">
+	<mat-form-field class="isbn" *ngIf="setting.current['searchCol.isbn']">
 		<mat-label>ISBN</mat-label>
 		<input matInput type="text" [(ngModel)]="isbn" (change)="doSearch()" (keyup)="doSearch()">
 		<button *ngIf="isbn" matSuffix mat-icon-button aria-label="Clear ISBN" (click)="isbn='';doSearch()">
@@ -58,27 +58,31 @@
 	</mat-form-field>
 </div>
 
-<div class="search-result">
+<div class="search-result{{ setting.current['misc.fixedWidth'] ? ' search-result-fixed' : ''}}">
 	<table *ngIf="result?.length">
 		<tr>
+			<th class="dl" *ngIf="setting.current['misc.dlLeftButton']">&#160;</th>
+			<th class="id" *ngIf="setting.current['resultCol.zlib_id']">zLib ID</th>
 			<th class="name">书名</th>
-			<th class="author">作者</th>
-			<th class="publisher">出版社</th>
-			<th class="ext">扩展名</th>
-			<th class="lang">语言</th>
-			<th class="isbn">ISBN</th>
-			<th class="filesize">&#160;</th>
-			<th class="dl">&#160;</th>
+			<th class="author" *ngIf="setting.current['resultCol.author']">作者</th>
+			<th class="publisher" *ngIf="setting.current['resultCol.publisher']">出版社</th>
+			<th class="ext" *ngIf="setting.current['resultCol.ext']">扩展名</th>
+			<th class="lang" *ngIf="setting.current['resultCol.lang']">语言</th>
+			<th class="isbn" *ngIf="setting.current['resultCol.isbn']">ISBN</th>
+			<th class="filesize" *ngIf="setting.current['resultCol.filesize']">&#160;</th>
+			<th class="dl" *ngIf="!setting.current['misc.dlLeftButton']">&#160;</th>
 		</tr>
 		<tr *ngFor="let a of result">
+			<td class="dl" *ngIf="setting.current['misc.dlLeftButton']"><a mat-button [href]="buildLink(a)" target="_blank">下载</a></td>
+			<td class="id" *ngIf="setting.current['resultCol.zlib_id']"><span>{{ a.id }}</span></td>
 			<td class="name" [title]="a.name"><span>{{ a.name }}</span></td>
-			<td class="author" [title]="a.author"><span>{{ a.author }}</span></td>
-			<td class="publisher" [title]="a.publisher"><span>{{ a.publisher }}</span></td>
-			<td class="ext"><span>{{ a.ext }}</span></td>
-			<td class="lang"><span>{{ a.lang }}</span></td>
-			<td class="isbn" [title]="a.isbn"><span>{{ a.isbn }}</span></td>
-			<td class="filesize"><span>{{ formatBytes(a.filesize) }}</span></td>
-			<td class="dl"><a mat-button [href]="buildLink(a)" target="_blank">下载</a></td>
+			<td class="author" [title]="a.author" *ngIf="setting.current['resultCol.author']"><span>{{ a.author }}</span></td>
+			<td class="publisher" [title]="a.publisher" *ngIf="setting.current['resultCol.publisher']"><span>{{ a.publisher }}</span></td>
+			<td class="ext" *ngIf="setting.current['resultCol.ext']"><span>{{ a.ext }}</span></td>
+			<td class="lang" *ngIf="setting.current['resultCol.lang']"><span>{{ a.lang }}</span></td>
+			<td class="isbn" [title]="a.isbn" *ngIf="setting.current['resultCol.isbn']"><span>{{ a.isbn }}</span></td>
+			<td class="filesize" *ngIf="setting.current['resultCol.filesize']"><span>{{ formatBytes(a.filesize) }}</span></td>
+			<td class="dl" *ngIf="!setting.current['misc.dlLeftButton']"><a mat-button [href]="buildLink(a)" target="_blank">下载</a></td>
 		</tr>
 	</table>
 </div>

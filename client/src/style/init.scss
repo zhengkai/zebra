@@ -79,9 +79,11 @@ header {
 
 app-root > div {
 	min-height: calc(100vh - 14rem);
-	max-width: 1688px;
 	margin: 0 auto;
 	padding: 0 2rem;
+	&.fixed {
+		width: 1280px;
+	}
 }
 
 @media screen and (max-width:682px) {

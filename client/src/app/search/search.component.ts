@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { SearchKey, Row, SearchService } from './search.service';
 import { NavService } from '../common/nav.service';
 import { SessionService } from '../common/session.service';
+import { SettingService } from '../setting/setting.service';
 
 @Component({
 	selector: 'app-search',
@@ -38,6 +39,7 @@ export class SearchComponent {
 		public srv: SearchService,
 		public nav: NavService,
 		public session: SessionService,
+		public setting: SettingService,
 	) {
 		for (const [k, v] of Object.entries(session.search)) {
 			this[k as SearchKey] = v;
@@ -52,7 +54,9 @@ export class SearchComponent {
 	}
 
 	async search(query: string) {
-		this.session.save(this);
+		if (this.setting.current['misc.rememberLastSearch']) {
+			this.session.save(this);
+		}
 		this.nav.loading = true;
 		const { ok, result } = await this.srv.Search(query);
 		if (ok) {
@@ -102,13 +106,19 @@ export class SearchComponent {
 
 	buildLink(r: Row) {
 
-		const host = 'https://cloudflare-ipfs.com';
+		const host = this.setting.current['misc.dlSite'].replace(/[/]+$/, '');
 
 		let name = r.name;
-		if (name !== r.author) {
+		if (name !== r.author && this.setting.current['fileName.author']) {
 			name += '_' + r.author;
 		}
-		name = name.replace(/\s+/g, '_');
+		if (name !== r.publisher && this.setting.current['fileName.publisher']) {
+			name += '_' + r.publisher;
+		}
+		if (this.setting.current['fileName.zlib_id']) {
+			name += '_' + r.id;
+		}
+		name = name.replace(/(\.|,)/g, '').replace(/\s+/g, '_');
 
 		const url = `${host}/ipfs/${r.ipfs_cid}?filename=${encodeURIComponent(name)}.${r.ext}`;
 

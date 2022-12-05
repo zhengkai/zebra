@@ -6,6 +6,7 @@ $(shell cp -n .config.default config.ini)
 -include config.ini
 
 local:
+	@if [ ! -d node_modules ]; then NG_CLI_ANALYTICS=ci npm install; fi
 	$(NG) serve --port $(port) --host 127.0.0.1 --public-host "$(domain)"
 
 init:

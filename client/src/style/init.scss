@@ -34,6 +34,12 @@ header {
 			font-size: 1.75rem;
 			font-weight: bold;
 			cursor: default;
+			img {
+				width: 3rem;
+				height: 3rem;
+				vertical-align: -0.75rem;
+				margin-right: 0.5rem;
+			}
 		}
 		.loading {
 			display: inline-flex;

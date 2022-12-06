@@ -88,6 +88,7 @@
 			<th class="lang" *ngIf="setting.current['resultCol.lang']">语言</th>
 			<th class="isbn" *ngIf="setting.current['resultCol.isbn']">ISBN</th>
 			<th class="filesize" *ngIf="setting.current['resultCol.filesize']">大小</th>
+			<th class="pages" *ngIf="setting.current['resultCol.pages']">页码</th>
 			<th class="dl" *ngIf="!setting.current['misc.dlLeftButton']">&#160;</th>
 		</tr>
 		<tr *ngFor="let a of result">
@@ -100,6 +101,7 @@
 			<td class="lang" *ngIf="setting.current['resultCol.lang']"><span>{{ a.lang }}</span></td>
 			<td class="isbn" [title]="a.isbn" *ngIf="setting.current['resultCol.isbn']"><span>{{ a.isbn }}</span></td>
 			<td class="filesize" *ngIf="setting.current['resultCol.filesize']"><span>{{ formatBytes(a.filesize) }}</span></td>
+			<td class="pages" *ngIf="setting.current['resultCol.pages']"><span *ngIf="a.pages">{{ a.pages }}</span></td>
 			<td class="dl" *ngIf="!setting.current['misc.dlLeftButton']"><a mat-button [href]="buildLink(a)" target="_blank">下载</a></td>
 		</tr>
 	</table>

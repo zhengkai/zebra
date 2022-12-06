@@ -5,7 +5,7 @@
 		width: calc(50% - 0.5rem);
 		margin: 0 0.25rem;
 	}
-	> .publisher, > .ext, > .lang, > .isbn {
+	> .publisher, > .ext, > .lang, > .isbn, > .zlib-id  {
 		width: calc(25% - 0.5rem);
 		margin: 0 0.25rem;
 	}
@@ -20,7 +20,7 @@
 		> .name, > .author {
 			width: calc(100% - 0.5rem);
 		}
-		> .publisher, > .ext, > .lang, > .isbn  {
+		> .publisher, > .ext, > .lang, > .isbn, > .zlib-id  {
 			width: calc(50% - 0.5rem);
 		}
 	}
@@ -62,12 +62,17 @@
 				text-align: right;
 				min-width: 4.5rem;
 				padding-right: 0.5rem;
+				white-space: nowrap;
 			}
 			&.ext {
 				text-align: center;
 			}
 			&.isbn {
 				max-width: 8rem;
+			}
+			&.pages {
+				white-space: nowrap;
+				text-align: right;
 			}
 			&.dl {
 				min-width: 4rem;

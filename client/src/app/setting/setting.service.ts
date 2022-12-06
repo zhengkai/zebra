@@ -17,6 +17,7 @@ const d = Object.freeze({
 	'resultCol.ext': true,
 	'resultCol.isbn': true,
 	'resultCol.filesize': true,
+	'resultCol.pages': true,
 	'resultCol.zlib_id': false,
 	'fileName.publisher': false,
 	'fileName.author': false,

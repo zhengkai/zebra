@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
+import { HistoryService } from '../history/history.service';
 
 const d = Object.freeze({
 	'misc.rememberLastSearch': true,
 	'misc.dlLeftButton': navigator.userAgent.match(/iPhone|Android/i),
 	'misc.dlSite': 'https://cloudflare-ipfs.com/',
 	'misc.fixedWidth': true,
+	'misc.history': true,
 	'searchCol.author': true,
 	'searchCol.lang': true,
 	'searchCol.publisher': true,
@@ -40,7 +42,9 @@ export class SettingService {
 
 	tmpData: any = {};
 
-	constructor() {
+	constructor(
+		public history: HistoryService,
+	) {
 		try {
 			const j = localStorage.getItem('setting');
 			if (j) {
@@ -75,6 +79,13 @@ export class SettingService {
 		return true;
 	}
 
+	isNavButtonHide(key: string) {
+		if (key === 'history') {
+			return !this.current['misc.history'];
+		}
+		return false;
+	}
+
 	reset() {
 		for (const s of Object.keys(d)) {
 			this.current[s] = d[s as settingKey];
@@ -90,6 +101,9 @@ export class SettingService {
 		}
 		if (!this.current['misc.rememberLastSearch']) {
 			localStorage.removeItem('session');
+		}
+		if (!this.current['misc.history']) {
+			this.history.clean();
 		}
 		localStorage.setItem('setting', JSON.stringify(this.current));
 	}

@@ -3,6 +3,8 @@ import { SearchKey, Row, SearchService } from './search.service';
 import { NavService } from '../common/nav.service';
 import { SessionService } from '../common/session.service';
 import { SettingService } from '../setting/setting.service';
+import { HistoryService } from '../history/history.service';
+import { SearchArgs } from '../common/type';
 
 @Component({
 	selector: 'app-search',
@@ -35,14 +37,12 @@ export class SearchComponent {
 
 	result: Row[] = [];
 
-	query = '';
-	url = '';
-
 	constructor(
 		public srv: SearchService,
 		public nav: NavService,
 		public session: SessionService,
 		public setting: SettingService,
+		public history: HistoryService,
 	) {
 		for (const [k, v] of Object.entries(session.search)) {
 			this[k as SearchKey] = v;
@@ -51,17 +51,19 @@ export class SearchComponent {
 		this.nav.go('search');
 	}
 
-	doSearch() {
-		const query = this.buildSearch();
-		this.error = false;
-		this.search(query);
-	}
+	async doSearch() {
 
-	async search(query: string) {
+		const args = new SearchArgs(this);
+
+		const query = args.query();
+		this.error = false;
 		if (this.setting.current['misc.rememberLastSearch']) {
-			this.session.save(this);
+			this.session.save(args);
 		}
 		this.nav.loading = true;
+
+		// console.log(args, query);
+
 		const { ok, error, result } = await this.srv.Search(query);
 		// await new Promise((p) => setTimeout(p, 1000));
 		if (ok) {
@@ -73,30 +75,9 @@ export class SearchComponent {
 		}
 		this.lastResult = query;
 		this.result = result;
-	}
-
-	buildSearch(): string {
-		let query = '';
-		if (this.id.length) {
-			query = this.buildQuery(<SearchKey>'id');
-		} else {
-			for (const s of ['name', 'author', 'publisher', 'lang', 'ext', 'isbn', 'id']) {
-				query += this.buildQuery(s as SearchKey);
-			}
+		if (result?.length) {
+			this.history.save(args);
 		}
-		return query;
-	}
-
-	buildQuery(key: SearchKey): string {
-		let s = this[key]?.replace(/"/g, '') || '';
-		if (key === <SearchKey>'id') {
-			s = s.replace(/[^0-9]/g, '');
-		}
-		if (!s.length) {
-			return '';
-		}
-		key = (this.keyBackend as any)[key] || key;
-		return `${key}:"${s}"`;
 	}
 
 	formatBytes(n: number) {
@@ -119,7 +100,10 @@ export class SearchComponent {
 
 	buildLink(r: Row) {
 
-		const host = this.setting.current['misc.dlSite'].replace(/[/]+$/, '');
+		const setting = this.setting.current['misc.dlSite'];
+		const base = setting === 'ipfs://'
+			? 'ipfs://'
+			: setting.replace(/[/]+$/, '') + '/ipfs/';
 
 		let name = r.name;
 		if (name !== r.author && this.setting.current['fileName.author']) {
@@ -133,7 +117,7 @@ export class SearchComponent {
 		}
 		name = name.replace(/(\.|,)/g, '').replace(/\s+/g, '_');
 
-		const url = `${host}/ipfs/${r.ipfs_cid}?filename=${encodeURIComponent(name)}.${r.ext}`;
+		const url = `${base}${r.ipfs_cid}?filename=${encodeURIComponent(name)}.${r.ext}`;
 
 		return url;
 	}

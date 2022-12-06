@@ -7,7 +7,7 @@
 			<mat-spinner color="accent" diameter="32" mode="indeterminate"></mat-spinner>
 		</div>
 		<nav>
-			<a *ngFor="let a of nav.list" [routerLink]="[a.path]" [class.selected]="nav.selectKey === a.key"><mat-icon>{{ a.icon }}</mat-icon>{{ a.name }}</a>
+			<a *ngFor="let a of nav.list" [routerLink]="[a.path]" [class.selected]="nav.selectKey === a.key" [class.hide]="setting.isNavButtonHide(a.key)"><mat-icon>{{ a.icon }}</mat-icon>{{ a.name }}</a>
 		</nav>
 	</div>
 </header>

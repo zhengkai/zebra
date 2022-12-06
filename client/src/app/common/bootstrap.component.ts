@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavService } from './nav.service';
+import { SettingService } from '../setting/setting.service';
 
 @Component({
 	selector: 'app-root',
@@ -11,6 +12,7 @@ export class BootstrapComponent {
 
 	constructor(
 		public nav: NavService,
+		public setting: SettingService,
 	) {
 	}
 }

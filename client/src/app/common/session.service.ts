@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { SearchKey } from '../search/search.service';
 import { BookSuggest } from './book-suggest';
+import { ISearchArgs } from './type';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class SessionService {
 
-	search = {
+	search = <ISearchArgs>{
 		name: '',
 		author: '',
 		lang: '',
@@ -36,9 +37,10 @@ export class SessionService {
 		}
 	}
 
-	save(obj: any) {
-		for (const k of Object.keys(this.search)) {
-			this.search[k as SearchKey] = obj[k] || '';
+	save(arg: ISearchArgs) {
+		for (const s of Object.keys(this.search)) {
+			const k = <SearchKey>s;
+			this.search[k] = arg[k];
 		}
 		const j = JSON.stringify(this.search);
 		localStorage.setItem('session', j);

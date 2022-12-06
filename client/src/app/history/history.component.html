@@ -1,1 +1,16 @@
-<div class="coming">coming (not) soon</div>
+<div class="history-box">
+	<div class="download">
+		<h2>下载历史</h2>
+		<p>coming (not) soon</p>
+	</div>
+	<div class="search">
+		<h2>搜索历史</h2>
+		<div *ngFor="let a of srv.list">
+			<p>{{ text(a) }}</p>
+			<div class="op">
+				<button mat-raised-button color="primary" (click)="go(a)"><mat-icon>search</mat-icon>搜索</button>
+				<button mat-raised-button color="warn" (click)="srv.del(a)"><mat-icon>delete</mat-icon>删除</button>
+			</div>
+		</div>
+	</div>
+</div>

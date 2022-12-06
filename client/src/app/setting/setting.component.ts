@@ -21,6 +21,7 @@ export class SettingComponent {
 		'https://ipfs.io/',
 		'https://gateway.pinata.cloud/',
 		'http://127.0.0.1:8080/',
+		'ipfs://',
 	];
 
 	constructor(

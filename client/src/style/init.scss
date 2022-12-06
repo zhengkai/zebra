@@ -14,6 +14,10 @@ p.clean {
 	height: 5rem;
 }
 
+.hide {
+	display: none;
+}
+
 header, footer {
 	background-color: #3f51b5;
 	> div {
@@ -71,6 +75,19 @@ header {
 				&:disabled {
 					color: #ccc;
 					background-color: red;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 1000px) {
+	header {
+		> div {
+			nav {
+				a {
+					width: 6rem;
+					font-size: 1.125rem;
 				}
 			}
 		}

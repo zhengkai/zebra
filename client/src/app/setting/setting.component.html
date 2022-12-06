@@ -42,6 +42,9 @@
 	<mat-checkbox [(ngModel)]="srv.current['misc.rememberLastSearch']">记住最后一次搜索条件</mat-checkbox>
 </section>
 <section>
+	<mat-checkbox [(ngModel)]="srv.current['misc.history']">保存历史记录（取消此项并保存会删除历史）</mat-checkbox>
+</section>
+<section>
 	<mat-checkbox [(ngModel)]="srv.current['misc.dlLeftButton']">下载按钮在最左边</mat-checkbox>
 </section>
 <section>

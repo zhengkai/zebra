@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { SearchKey, Row, SearchService } from './search.service';
+import { SearchService } from './search.service';
 import { NavService } from '../common/nav.service';
-import { SessionService } from '../common/session.service';
 import { SettingService } from '../setting/setting.service';
 import { HistoryService } from '../history/history.service';
-import { SearchArgs } from '../common/type';
+import { IResultRow } from '../common/type';
 
 @Component({
 	selector: 'app-search',
@@ -35,49 +34,22 @@ export class SearchComponent {
 
 	error = false;
 
-	result: Row[] = [];
-
 	constructor(
 		public srv: SearchService,
 		public nav: NavService,
-		public session: SessionService,
 		public setting: SettingService,
 		public history: HistoryService,
 	) {
-		for (const [k, v] of Object.entries(session.search)) {
-			this[k as SearchKey] = v;
-		}
-		this.doSearch();
 		this.nav.go('search');
 	}
 
-	async doSearch() {
+	search() {
 
-		const args = new SearchArgs(this);
-
-		const query = args.query();
-		this.error = false;
-		if (this.setting.current['misc.rememberLastSearch']) {
-			this.session.save(args);
-		}
-		this.nav.loading = true;
+		this.srv.Search(null);
 
 		// console.log(args, query);
 
-		const { ok, error, result } = await this.srv.Search(query);
 		// await new Promise((p) => setTimeout(p, 1000));
-		if (ok) {
-			this.error = error;
-			this.nav.loading = false;
-		}
-		if (!ok || this.lastResult === query) {
-			return;
-		}
-		this.lastResult = query;
-		this.result = result;
-		if (result?.length) {
-			this.history.save(args);
-		}
 	}
 
 	formatBytes(n: number) {
@@ -98,7 +70,7 @@ export class SearchComponent {
 		return n.toFixed(1) + ' ' + units[i - 1];
 	}
 
-	buildLink(r: Row) {
+	buildLink(r: IResultRow) {
 
 		const setting = this.setting.current['misc.dlSite'];
 		const base = setting === 'ipfs://'

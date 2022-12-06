@@ -11,6 +11,20 @@ export const KeyName = {
 	filesize: '文件大小',
 };
 
+export interface IResultRow {
+    id: number;
+    name: string;
+    author: string;
+    publisher: string;
+    ext: string;
+    filesize: number;
+    lang: string;
+    year: number;
+    pages: number;
+    isbn: string;
+    ipfs_cid: string;
+}
+
 export interface ISearchArgs {
 	name: string;
 	author: string;

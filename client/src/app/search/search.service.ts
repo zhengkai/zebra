@@ -1,28 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-export type SearchKey = 'name' | 'author' | 'publisher' | 'lang' | 'ext' | 'isbn';
+import { SessionService } from '../common/session.service';
+import { SettingService } from '../setting/setting.service';
+import { NavService } from '../common/nav.service';
+import { HistoryService } from '../history/history.service';
+import { SearchKey, SearchArgs, IResultRow } from '../common/type';
 
 export interface Page {
 	query: string;
-	result: Row[];
+	result: IResultRow[];
 	error: boolean;
 	done: boolean;
 	cbList: (() => void)[];
-}
-
-export interface Row {
-    id: number;
-    name: string;
-    author: string;
-    publisher: string;
-    ext: string;
-    filesize: number;
-    lang: string;
-    year: number;
-    pages: number;
-    isbn: string;
-    ipfs_cid: string;
 }
 
 @Injectable({
@@ -30,18 +19,58 @@ export interface Row {
 })
 export class SearchService {
 
+	args: SearchArgs;
+
 	baseURL = '/search?limit=100&query=';
 
 	lastQuery = '';
+	lastResult = '';
+
+	error = false;
 
 	cache: { [key: string]: Page } = {};
+	result: IResultRow[] = [];
 
 	constructor(
+		public session: SessionService,
+		public setting: SettingService,
+		public nav: NavService,
+		public history: HistoryService,
 		private http: HttpClient,
 	) {
+		this.args = session.search;
+		this.Search(null);
 	}
 
-	async Search(query: string) {
+	async Search(a: SearchArgs|null) {
+		if (!a) {
+			a = this.args;
+		} else {
+			this.args = new SearchArgs(a);
+		}
+		const query = a.query();
+		this.error = false;
+		if (this.setting.current['misc.rememberLastSearch']) {
+			this.session.save(a);
+		}
+		this.nav.loading = true;
+
+		const { ok, error, result } = await this._search(query);
+		if (ok) {
+			this.error = error;
+			this.nav.loading = false;
+		}
+		if (!ok || this.lastResult === query) {
+			return;
+		}
+		this.lastResult = query;
+		this.result = result;
+		if (result?.length) {
+			this.history.save(a);
+		}
+	}
+
+	async _search(query: string) {
 		this.lastQuery = query;
 		let p = this.cache[query];
 		if (!p) {
@@ -58,6 +87,7 @@ export class SearchService {
 			p.done = false;
 			this.fetch(p);
 		}
+		// await new Promise((p) => setTimeout(p, 1000));
 		if (query === '') {
 			p.done = true;
 		}
@@ -111,7 +141,7 @@ export class SearchService {
 			if (!row?.id) {
 				continue;
 			}
-			const r = <Row>{
+			const r = <IResultRow>{
 				id: +row.id,
 				name: '' + (row?.title || ''),
 				author: '' + (row?.author || ''),
@@ -129,11 +159,11 @@ export class SearchService {
 				// 去掉书名里多余的 .txt 之类的
 				const kl: SearchKey[] = ['name', 'author', 'publisher'];
 				for (const k of kl) {
-					const v = r[k];
+					const v = r[k] as string;
 					if (!v.endsWith('.' + r.ext)) {
 						continue;
 					}
-					r[k] = v.substring(0, v.length - 1 - r.ext.length);
+					(r[k] as any) = '' + v.substring(0, v.length - 1 - r.ext.length);
 				}
 			}
 			p.result.push(r);

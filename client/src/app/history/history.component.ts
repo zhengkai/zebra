@@ -34,7 +34,7 @@ export class HistoryComponent {
 
 	go(a: SearchArgs) {
 		this.router.navigate(['/']).finally(() => {
-			this.search.Search(a.query());
+			this.search.Search(a);
 		});
 	}
 }

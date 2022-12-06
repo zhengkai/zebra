@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SearchArgs } from '../common/type';
+import { ProxyService } from '../common/proxy.service';
 
 @Injectable({
 	providedIn: 'root',
@@ -8,7 +9,12 @@ export class HistoryService {
 
 	list: SearchArgs[] = [];
 
-	constructor() {
+	constructor(
+		public proxy: ProxyService,
+	) {
+		proxy.saveHistory = (a: SearchArgs) => {
+			this.save(a);
+		};
 		try {
 			const j = localStorage.getItem('history');
 			if (j) {
@@ -43,6 +49,7 @@ export class HistoryService {
 	}
 
 	tidy(a: SearchArgs) {
+		a = new SearchArgs(a);
 		for (const i in this.list) {
 			const o = this.list[i];
 			if (o.includes(a)) {

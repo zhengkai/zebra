@@ -80,14 +80,14 @@
 	<table *ngIf="result?.length">
 		<tr>
 			<th class="dl" *ngIf="setting.current['misc.dlLeftButton']">&#160;</th>
+			<th class="id" *ngIf="setting.current['resultCol.zlib_id']">zLib ID</th>
 			<th class="name">书名</th>
 			<th class="author" *ngIf="setting.current['resultCol.author']">作者</th>
 			<th class="publisher" *ngIf="setting.current['resultCol.publisher']">出版社</th>
 			<th class="ext" *ngIf="setting.current['resultCol.ext']">扩展名</th>
 			<th class="lang" *ngIf="setting.current['resultCol.lang']">语言</th>
 			<th class="isbn" *ngIf="setting.current['resultCol.isbn']">ISBN</th>
-			<th class="id" *ngIf="setting.current['resultCol.zlib_id']">zLib ID</th>
-			<th class="filesize" *ngIf="setting.current['resultCol.filesize']">&#160;</th>
+			<th class="filesize" *ngIf="setting.current['resultCol.filesize']">大小</th>
 			<th class="dl" *ngIf="!setting.current['misc.dlLeftButton']">&#160;</th>
 		</tr>
 		<tr *ngFor="let a of result">

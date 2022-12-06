@@ -3,6 +3,7 @@ const list = [
 	'马丁·伊登',
 	'卧底经济学',
 	'皇帝新脑',
+	'四世同堂',
 ];
 
 export const BookSuggest = {

@@ -4,7 +4,7 @@ const d = Object.freeze({
 	'misc.rememberLastSearch': true,
 	'misc.dlLeftButton': navigator.userAgent.match(/iPhone|Android/i),
 	'misc.dlSite': 'https://cloudflare-ipfs.com/',
-	'misc.fixedWidth': false,
+	'misc.fixedWidth': true,
 	'searchCol.author': true,
 	'searchCol.lang': true,
 	'searchCol.publisher': true,

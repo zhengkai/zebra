@@ -82,13 +82,15 @@ export class SearchArgs {
 
 	_buildKey(key: SearchKey): string {
 		let s = this[key].replace(/"/g, '');
-		if (key === <SearchKey>'id') {
+		if (key === 'id') {
 			s = s.replace(/[^0-9]/g, '');
+		} else if (key === 'ext') {
+			s = s.replace(/\s+/g, '');
 		}
 		if (!s.length) {
 			return '';
 		}
 		key = (keyBackend as any)[key] || key;
-		return `${key}:"${s}"`;
+		return `${key}:${s} `;
 	}
 }

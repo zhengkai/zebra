@@ -29,6 +29,14 @@
 .search-result {
 	min-height: 400px;
 	margin: 0 auto;
+	> div.fail {
+		max-width: 640px;
+		margin: 0 auto;
+		text-align: center;
+		button {
+			margin-left: 0.5rem;
+		}
+	}
 	table {
 		width: 100%;
 		border-collapse: collapse;

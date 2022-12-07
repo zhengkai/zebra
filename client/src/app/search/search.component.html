@@ -1,32 +1,32 @@
 <div class="search-box{{ setting.current['misc.fixedWidth'] ? ' search-box-fixed' : ''}}">
 	<mat-form-field class="name">
 		<mat-label>书名</mat-label>
-		<input matInput [(ngModel)]="srv.args.name" (change)="search()" (keyup)="search()">
-		<button *ngIf="name" matSuffix mat-icon-button aria-label="Clear Name" (click)="name='';search()">
+		<input matInput [(ngModel)]="srv.args.name" (change)="search()" (keyup)="search()" maxlength="50">
+		<button *ngIf="srv.args.name" matSuffix mat-icon-button aria-label="Clear Name" (click)="srv.args.name='';search()">
 			<mat-icon>close</mat-icon>
 		</button>
 	</mat-form-field>
 
 	<mat-form-field class="author" *ngIf="setting.current['searchCol.author']">
 		<mat-label>作者</mat-label>
-		<input matInput [(ngModel)]="srv.args.author" (change)="search()" (keyup)="search()">
-		<button *ngIf="author" matSuffix mat-icon-button aria-label="Clear Author" (click)="author='';search()">
+		<input matInput [(ngModel)]="srv.args.author" (change)="search()" (keyup)="search()" maxlength="30">
+		<button *ngIf="srv.args.author" matSuffix mat-icon-button aria-label="Clear Author" (click)="srv.args.author='';search()">
 			<mat-icon>close</mat-icon>
 		</button>
 	</mat-form-field>
 
 	<mat-form-field class="publisher" *ngIf="setting.current['searchCol.publisher']">
 		<mat-label>出版社</mat-label>
-		<input matInput type="text" [(ngModel)]="srv.args.publisher" (change)="search()" (keyup)="search()">
-		<button *ngIf="publisher" matSuffix mat-icon-button aria-label="Clear Publisher" (click)="publisher='';search()">
+		<input matInput type="text" [(ngModel)]="srv.args.publisher" (change)="search()" (keyup)="search()" maxlength="30">
+		<button *ngIf="srv.args.publisher" matSuffix mat-icon-button aria-label="Clear Publisher" (click)="srv.args.publisher='';search()">
 			<mat-icon>close</mat-icon>
 		</button>
 	</mat-form-field>
 
 	<mat-form-field class="ext" *ngIf="setting.current['searchCol.ext']">
 		<mat-label>扩展名</mat-label>
-		<input matInput type="text" [matAutocomplete]="autoExt" [(ngModel)]="srv.args.ext" (change)="search()" (keyup)="search()">
-		<button *ngIf="ext" matSuffix mat-icon-button aria-label="Clear Extension" (click)="ext='';search()">
+		<input matInput type="text" [matAutocomplete]="autoExt" [(ngModel)]="srv.args.ext" (change)="search()" (keyup)="search()" maxlength="10">
+		<button *ngIf="srv.args.ext" matSuffix mat-icon-button aria-label="Clear Extension" (click)="srv.args.ext='';search()">
 			<mat-icon>close</mat-icon>
 		</button>
 		<mat-autocomplete #autoExt="matAutocomplete" (optionSelected)="search()">
@@ -38,8 +38,8 @@
 
 	<mat-form-field class="lang" *ngIf="setting.current['searchCol.lang']">
 		<mat-label>语言</mat-label>
-		<input matInput type="text" [matAutocomplete]="autoLang" [(ngModel)]="srv.args.lang" (change)="search()" (keyup)="search()">
-		<button *ngIf="lang" matSuffix mat-icon-button aria-label="Clear Language" (click)="lang='';search()">
+		<input matInput type="text" [matAutocomplete]="autoLang" [(ngModel)]="srv.args.lang" (change)="search()" (keyup)="search()" maxlength="20">
+		<button *ngIf="srv.args.lang" matSuffix mat-icon-button aria-label="Clear Language" (click)="srv.args.lang='';search()">
 			<mat-icon>close</mat-icon>
 		</button>
 		<mat-autocomplete #autoLang="matAutocomplete" (optionSelected)="search()">
@@ -51,16 +51,16 @@
 
 	<mat-form-field class="isbn" *ngIf="setting.current['searchCol.isbn']">
 		<mat-label>ISBN</mat-label>
-		<input matInput type="text" [(ngModel)]="srv.args.isbn" (change)="search()" (keyup)="search()">
-		<button *ngIf="isbn" matSuffix mat-icon-button aria-label="Clear ISBN" (click)="isbn='';search()">
+		<input matInput type="text" [(ngModel)]="srv.args.isbn" (change)="search()" (keyup)="search()" maxlength="20">
+		<button *ngIf="srv.args.isbn" matSuffix mat-icon-button aria-label="Clear ISBN" (click)="srv.args.isbn='';search()">
 			<mat-icon>close</mat-icon>
 		</button>
 	</mat-form-field>
 
 	<mat-form-field class="zlib-id" *ngIf="setting.current['searchCol.zlib_id']">
 		<mat-label>zLib ID</mat-label>
-		<input matInput type="text" [(ngModel)]="srv.args.id" (change)="search()" (keyup)="search()">
-		<button *ngIf="id" matSuffix mat-icon-button aria-label="Clear zLib ID" (click)="id='';search()">
+		<input matInput type="text" [(ngModel)]="srv.args.id" (change)="search()" (keyup)="search()" maxlength="20">
+		<button *ngIf="srv.args.id" matSuffix mat-icon-button aria-label="Clear zLib ID" (click)="srv.args.id='';search()">
 			<mat-icon>close</mat-icon>
 		</button>
 	</mat-form-field>

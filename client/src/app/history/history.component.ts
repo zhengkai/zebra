@@ -33,12 +33,11 @@ export class HistoryComponent {
 	}
 
 	go(a: SearchArgs) {
+		this.search.Search(a);
+		this.router.navigate(['/']);
 		window.scroll({
 			top: 0,
 			left: 0,
-		});
-		this.router.navigate(['/']).finally(() => {
-			this.search.Search(a);
 		});
 	}
 }

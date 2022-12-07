@@ -111,20 +111,11 @@
 @media screen and (max-width:650px) {
 	.search-result {
 		table {
-			th {
-				&.publisher, &.lang, &.isbn {
-					display: none;
-				}
-			}
 			tr {
-
 				td {
 					&.author {
 						max-width: 5rem;
 						width: 5rem;
-					}
-					&.publisher, &.lang, &.isbn {
-						display: none;
 					}
 				}
 			}

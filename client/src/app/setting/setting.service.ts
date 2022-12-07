@@ -1,25 +1,27 @@
 import { Injectable } from '@angular/core';
 import { HistoryService } from '../history/history.service';
 
+const isMobile = navigator.userAgent.match(/iPhone|Android/i);
+
 const d = Object.freeze({
 	'misc.rememberLastSearch': true,
-	'misc.dlLeftButton': navigator.userAgent.match(/iPhone|Android/i),
+	'misc.dlLeftButton': isMobile,
 	'misc.dlSite': 'https://cloudflare-ipfs.com/',
 	'misc.fixedWidth': true,
 	'misc.history': true,
 	'searchCol.author': true,
-	'searchCol.lang': true,
-	'searchCol.publisher': true,
+	'searchCol.lang': !isMobile,
+	'searchCol.publisher': !isMobile,
 	'searchCol.ext': true,
-	'searchCol.isbn': true,
+	'searchCol.isbn': !isMobile,
 	'searchCol.zlib_id': false,
 	'resultCol.author': true,
-	'resultCol.lang': true,
-	'resultCol.publisher': true,
+	'resultCol.lang': !isMobile,
+	'resultCol.publisher': !isMobile,
 	'resultCol.ext': true,
-	'resultCol.isbn': true,
+	'resultCol.isbn': !isMobile,
 	'resultCol.filesize': true,
-	'resultCol.pages': true,
+	'resultCol.pages': !isMobile,
 	'resultCol.zlib_id': false,
 	'fileName.publisher': false,
 	'fileName.author': false,

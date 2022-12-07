@@ -44,12 +44,7 @@ export class SearchComponent {
 	}
 
 	search() {
-
-		this.srv.Search(null);
-
-		// console.log(args, query);
-
-		// await new Promise((p) => setTimeout(p, 1000));
+		this.srv.Search();
 	}
 
 	formatBytes(n: number) {

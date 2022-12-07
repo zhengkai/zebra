@@ -39,10 +39,10 @@ export class SearchService {
 		private http: HttpClient,
 	) {
 		this.args = session.search;
-		this.Search(null);
+		this.Search();
 	}
 
-	async Search(a: SearchArgs|null) {
+	async Search(a?: SearchArgs) {
 		if (!a) {
 			a = this.args;
 		} else {

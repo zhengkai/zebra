@@ -24,12 +24,14 @@ export class NavService {
 			icon: 'history',
 			path: '/history',
 		},
+		/*
 		{
 			key: 'bookmark',
 			name: '书签',
 			icon: 'bookmarks',
 			path: '/bookmark',
 		},
+		 */
 	];
 
 	selectKey = 'search';

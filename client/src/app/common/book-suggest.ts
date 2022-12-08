@@ -4,6 +4,7 @@ const list = [
 	'卧底经济学',
 	'皇帝新脑',
 	'四世同堂',
+	'元素的盛宴',
 ];
 
 export const BookSuggest = {

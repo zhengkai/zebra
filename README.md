@@ -1,4 +1,4 @@
-Zebra：基于 [zLib Searcher](https://github.com/zu1k/zlib-searcher) 的 Web 界面
+Zebra：基于 [Book Searcher](https://github.com/book-searcher-org/book-searcher) 的 Web 界面
 ======
 
 <https://zebra.9farm.com/>

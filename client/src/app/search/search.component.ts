@@ -47,6 +47,10 @@ export class SearchComponent {
 		this.srv.Search();
 	}
 
+	changeSort() {
+		this.srv.changeSort();
+	}
+
 	formatBytes(n: number) {
 		if (n <= 0) {
 			return '';

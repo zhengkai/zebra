@@ -28,6 +28,8 @@ export class SearchService {
 
 	error = false;
 
+	sortType = 1;
+
 	cache: { [key: string]: Page } = {};
 	result: IResultRow[] = [];
 
@@ -38,6 +40,13 @@ export class SearchService {
 		public history: HistoryService,
 		private http: HttpClient,
 	) {
+
+		let sortType = +(localStorage.getItem('sortType') || 0);
+		if (![1, 2].includes(sortType)) {
+			sortType = 0;
+		}
+		this.sortType = sortType;
+
 		this.args = session.search;
 		this.Search();
 	}
@@ -64,9 +73,11 @@ export class SearchService {
 			return;
 		}
 		this.lastResult = query;
+		this.sort(result);
 		this.result = result;
 		if (result?.length) {
 			this.history.save(a);
+			return;
 		}
 	}
 
@@ -106,6 +117,27 @@ export class SearchService {
 		};
 	}
 
+	changeSort() {
+		this.sortType++;
+		if (this.sortType > 2) {
+			this.sortType = 0;
+		}
+		localStorage.setItem('sortType', '' + this.sortType);
+		this.sort(this.result);
+	}
+
+	sort(result: IResultRow[]) {
+		result.sort((a, b) => {
+			if (this.sortType === 1) {
+				return a.id - b.id;
+			}
+			if (this.sortType === 2) {
+				return b.id - a.id;
+			}
+			return a.idx - b.idx;
+		});
+	}
+
 	fetch(p: Page) {
 		const url = this.baseURL + encodeURIComponent(p.query);
 
@@ -137,10 +169,12 @@ export class SearchService {
 		if (!list) {
 			p.error = true;
 		}
+		let idx = 0;
 		for (const row of list) {
 			if (!row?.id) {
 				continue;
 			}
+			idx++;
 			const r = <IResultRow>{
 				id: +row.id,
 				name: '' + (row?.title || ''),
@@ -153,6 +187,7 @@ export class SearchService {
 				pages: +row?.pages,
 				isbn: (row?.isbn || '').replace(/,/g, ', '),
 				ipfs_cid: '' + (row?.ipfs_cid || ''),
+				idx,
 			};
 
 			if (r.ext.length) {

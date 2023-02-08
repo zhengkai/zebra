@@ -47,6 +47,18 @@
 			background-color: #eee;
 			padding: 0.5rem;
 			white-space: nowrap;
+			cursor: default;
+			&.id {
+				cursor: pointer;
+			}
+			&.sort-1::after {
+				color: gray;
+				content: "⇧";
+			}
+			&.sort-2::after {
+				color: gray;
+				content: "⇩";
+			}
 		}
 		tr {
 			&:hover {

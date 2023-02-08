@@ -80,7 +80,7 @@
 	<table *ngIf="srv.result?.length">
 		<tr>
 			<th class="dl" *ngIf="setting.current['misc.dlLeftButton']">&#160;</th>
-			<th class="id" *ngIf="setting.current['resultCol.zlib_id']">zLib ID</th>
+			<th class="id sort-{{ srv.sortType }}" *ngIf="setting.current['resultCol.zlib_id']" (click)="changeSort()">zLib ID</th>
 			<th class="name">书名</th>
 			<th class="author" *ngIf="setting.current['resultCol.author']">作者</th>
 			<th class="publisher" *ngIf="setting.current['resultCol.publisher']">出版社</th>

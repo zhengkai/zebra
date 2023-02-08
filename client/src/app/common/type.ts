@@ -23,6 +23,7 @@ export interface IResultRow {
     pages: number;
     isbn: string;
     ipfs_cid: string;
+	idx: number; // 默认结果顺序
 }
 
 export interface ISearchArgs {

@@ -86,7 +86,7 @@ export class SearchComponent {
 		if (this.setting.current['fileName.zlib_id']) {
 			name += '_' + r.id;
 		}
-		name = name.replace(/(\.|,)/g, '').replace(/\s+/g, '_');
+		name = name.replace(/(\.|,)/g, '').replace(/[\s/]+/g, '_');
 
 		const url = `${base}${r.ipfs_cid}?filename=${encodeURIComponent(name)}.${r.ext}`;
 
